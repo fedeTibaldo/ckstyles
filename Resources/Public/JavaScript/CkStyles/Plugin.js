@@ -1351,47 +1351,6 @@ exports.default = EventInfo;
 
 /***/ }),
 
-/***/ "./node_modules/@ckeditor/ckeditor5-utils/src/first.js":
-/*!*************************************************************!*\
-  !*** ./node_modules/@ckeditor/ckeditor5-utils/src/first.js ***!
-  \*************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = first;
-/**
- * @license Copyright (c) 2003-2018, CKSource - Frederico Knabben. All rights reserved.
- * For licensing, see LICENSE.md.
- */
-
-/**
- * @module utils/first
- */
-
-/**
- * Returns first item of the given `iterable`.
- *
- * @param {Iterable.<*>} iterable
- * @returns {*}
- */
-function first(iterable) {
-  var iteratorItem = iterable.next();
-
-  if (iteratorItem.done) {
-    return null;
-  }
-
-  return iteratorItem.value;
-}
-
-/***/ }),
-
 /***/ "./node_modules/@ckeditor/ckeditor5-utils/src/mix.js":
 /*!***********************************************************!*\
   !*** ./node_modules/@ckeditor/ckeditor5-utils/src/mix.js ***!
@@ -36661,10 +36620,6 @@ var _command = __webpack_require__(/*! @ckeditor/ckeditor5-core/src/command */ "
 
 var _command2 = _interopRequireDefault(_command);
 
-var _first = __webpack_require__(/*! @ckeditor/ckeditor5-utils/src/first */ "./node_modules/@ckeditor/ckeditor5-utils/src/first.js");
-
-var _first2 = _interopRequireDefault(_first);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -36674,10 +36629,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 /**
- * Block style command
- *
- * Sets a class on the top most block.
- *
+ * Sets a class a given attribute on the top most blocks.
  */
 var BlockStyleCommand = function (_Command) {
     _inherits(BlockStyleCommand, _Command);
@@ -36735,9 +36687,12 @@ var BlockStyleCommand = function (_Command) {
     return BlockStyleCommand;
 }(_command2.default);
 
-// Returns blocks from selection that should have blockIndent selection set.
-//
-// @param {module:engine/model/model~model} model A model.
+/**
+ * Returns the top most blocks of the given model
+ *
+ * @param model
+ * @returns {*}
+ */
 
 
 exports.default = BlockStyleCommand;
@@ -36777,25 +36732,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // instead of the following line, we have to import from 'ckeditor5-exports'.
-//import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-//import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
-
-
-// NOTE: This is a FACTORY FUNCTION for the plugin, which needs the current preset configuration as parameter.
 /**
- * presetConfiguration has the following shape:
- *   label: 'Fontcolor'
- *   options:
- *     'red':
- *       label: Red
- *       cssClass: 'my-class-red'
- *     'green':
- *       label: Green
- *       cssClass: 'my-class-green'
+ * FACTORY FUNCTION for the plugin
+ * needs the current preset configuration as parameter.
  */
-
 exports.default = function (presetIdentifier, presetConfiguration) {
     return function (_Plugin) {
         _inherits(BlockStyleEditing, _Plugin);
@@ -36813,12 +36755,14 @@ exports.default = function (presetIdentifier, presetConfiguration) {
 
                 var editor = this.editor;
 
+                // Model configuration
                 var model = {
                     key: presetIdentifier,
                     values: []
                 };
-                var view = {};
 
+                // View configuration
+                var view = {};
                 Object.keys(presetConfiguration.options).forEach(function (optionIdentifier) {
                     model.values.push(optionIdentifier);
                     view[optionIdentifier] = {
@@ -36833,12 +36777,12 @@ exports.default = function (presetIdentifier, presetConfiguration) {
                     allowIn: '$root'
                 });
 
+                // Convert the model to view correctly
                 editor.conversion.attributeToAttribute({
                     model: model,
                     view: view
                 });
 
-                // Register the heading command for this option.
                 editor.commands.add('blockStyles:' + presetIdentifier, new _BlockStyleCommand2.default(editor));
             }
         }]);
@@ -37117,19 +37061,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 //import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 
 
-// NOTE: This is a FACTORY FUNCTION for the plugin, which needs the current preset configuration as parameter.
 /**
- * presetConfiguration has the following shape:
- *   label: 'Fontcolor'
- *   options:
- *     'red':
- *       label: Red
- *       cssClass: 'my-class-red'
- *     'green':
- *       label: Green
- *       cssClass: 'my-class-green'
+ * FACTORY FUNCTION for the plugin
+ * needs the current preset configuration as parameter.
  */
-
 exports.default = function (presetIdentifier, presetConfiguration) {
     return function (_Plugin) {
         _inherits(InlineStylesEditing, _Plugin);
@@ -37143,13 +37078,10 @@ exports.default = function (presetIdentifier, presetConfiguration) {
         _createClass(InlineStylesEditing, [{
             key: 'init',
             value: function init() {
-                // 1. we need to extend the schema
                 this.editor.model.schema.extend('$text', { allowAttributes: presetIdentifier });
 
-                // 2. convert the fontColor attribute to the view correctly
-                // Reference: https://ckeditor.com/docs/ckeditor5/latest/api/module_engine_conversion_conversion-Conversion.html#function-attributeToElement
+                // Model configuration
                 var config = {
-                    // the name of the model must match the "allowAttribute" from above.
                     model: {
                         key: presetIdentifier,
                         values: Object.keys(presetConfiguration.options)
@@ -37157,16 +37089,17 @@ exports.default = function (presetIdentifier, presetConfiguration) {
                     view: {}
                 };
 
+                // View configuration
                 Object.keys(presetConfiguration.options).forEach(function (optionIdentifier) {
                     config.view[optionIdentifier] = {
-                        name: 'span',
+                        name: presetConfiguration.targetTag || 'span',
                         classes: presetConfiguration.options[optionIdentifier].cssClass
                     };
                 });
 
+                // Convert the model to view correctly
                 this.editor.conversion.attributeToElement(config);
 
-                // 3. we need a command to set the attribute and to receive attribute values
                 this.editor.commands.add('inlineStyles:' + presetIdentifier, new _InlineStylesCommand2.default(this.editor, presetIdentifier));
             }
         }]);
@@ -37229,9 +37162,6 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _dec, _class, _class2, _temp;
-
-// CKEditorAPI is in the ROOT of this package - but you need to know this ;)
-
 
 var _react = __webpack_require__(/*! react */ "./node_modules/@neos-project/neos-ui-extensibility/src/shims/vendor/react/index.js");
 
@@ -37359,9 +37289,6 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _dec, _class, _class2, _temp;
 
-// CKEditorAPI is in the ROOT of this package - but you need to know this ;)
-
-
 var _react = __webpack_require__(/*! react */ "./node_modules/@neos-project/neos-ui-extensibility/src/shims/vendor/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
@@ -37447,7 +37374,6 @@ var InlineStyleSelector = (_dec = (0, _reactRedux.connect)((0, _plowJs.$transfor
     }, {
         key: 'handleOnSelect',
         value: function handleOnSelect(optionIdentifier) {
-            // only "this" accessible here
             CkEditorApi.executeCommand('inlineStyles:' + this.props.presetIdentifier, { value: optionIdentifier });
         }
     }]);
@@ -37493,48 +37419,40 @@ var _neosUiExtensibility = __webpack_require__(/*! @neos-project/neos-ui-extensi
 
 var _neosUiExtensibility2 = _interopRequireDefault(_neosUiExtensibility);
 
+var _plowJs = __webpack_require__(/*! plow-js */ "./node_modules/@neos-project/neos-ui-extensibility/src/shims/vendor/plow-js/index.js");
+
 var _InlineStylesEditing = __webpack_require__(/*! ./InlineStylesEditing */ "./src/InlineStylesEditing.js");
 
 var _InlineStylesEditing2 = _interopRequireDefault(_InlineStylesEditing);
-
-var _plowJs = __webpack_require__(/*! plow-js */ "./node_modules/@neos-project/neos-ui-extensibility/src/shims/vendor/plow-js/index.js");
-
-var _reactUiComponents = __webpack_require__(/*! @neos-project/react-ui-components */ "./node_modules/@neos-project/neos-ui-extensibility/src/shims/neosProjectPackages/react-ui-components/index.js");
 
 var _InlineStyleSelector = __webpack_require__(/*! ./components/InlineStyleSelector */ "./src/components/InlineStyleSelector.js");
 
 var _InlineStyleSelector2 = _interopRequireDefault(_InlineStyleSelector);
 
-var _BlockStyleSelector = __webpack_require__(/*! ./components/BlockStyleSelector */ "./src/components/BlockStyleSelector.js");
-
-var _BlockStyleSelector2 = _interopRequireDefault(_BlockStyleSelector);
-
 var _BlockStyleEditing = __webpack_require__(/*! ./BlockStyleEditing */ "./src/BlockStyleEditing.js");
 
 var _BlockStyleEditing2 = _interopRequireDefault(_BlockStyleEditing);
 
+var _BlockStyleSelector = __webpack_require__(/*! ./components/BlockStyleSelector */ "./src/components/BlockStyleSelector.js");
+
+var _BlockStyleSelector2 = _interopRequireDefault(_BlockStyleSelector);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// The key (1st parameter of the manifest) technically does not matter; but we can hopefully use it later
-// for a better debugging experience.
-
-
-// THE FOLLOWING LINE WILL NOT WORK, BECAUSE IT IS NOT A TOP LEVEL EXPORT OF THE MODULE, but inside "/src/"
-//import IconButton from '@neos-project/react-ui-components/src/IconButton/';
-// Luckily, @neos-project/react-ui-components exports all components as named components
 (0, _neosUiExtensibility2.default)('FedeTibaldo.CkStyles:Styles', {}, function (globalRegistry, _ref) {
     var frontendConfiguration = _ref.frontendConfiguration;
 
 
-    // FEATURE 2: Inline Style Selector
     var ckEditorRegistry = globalRegistry.get('ckEditor5');
     var richtextToolbar = ckEditorRegistry.get('richtextToolbar');
     var config = ckEditorRegistry.get('config');
+
     var inlineStyleConfiguration = frontendConfiguration['FedeTibaldo.CkStyles:InlineStyles'];
     var blockStyleConfiguration = frontendConfiguration['FedeTibaldo.CkStyles:BlockStyles'];
 
+    // Block style
     if (blockStyleConfiguration) {
-        // BlockStyle
+
         Object.keys(blockStyleConfiguration.presets).forEach(function (presetIdentifier) {
 
             var blockStylePresetConfiguration = blockStyleConfiguration.presets[presetIdentifier];
@@ -37542,17 +37460,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
             config.set('FedeTibaldo.CkStyles:BlockStyles_' + presetIdentifier, function (ckEditorConfiguration, _ref2) {
                 var editorOptions = _ref2.editorOptions;
 
-
                 var editing = (0, _BlockStyleEditing2.default)(presetIdentifier, blockStylePresetConfiguration);
-
                 ckEditorConfiguration.plugins = ckEditorConfiguration.plugins || [];
                 ckEditorConfiguration.plugins.push(editing);
-
                 return ckEditorConfiguration;
             });
 
             richtextToolbar.set('blockStyles_' + presetIdentifier, {
                 component: _BlockStyleSelector2.default,
+                // Display only if the preset is activated in NodeType.yaml for this node property
                 isVisible: function isVisible(editorOptions, formattingUnderCursor) {
                     var isVisible = false;
                     if (editorOptions['blockStyling'] !== undefined && editorOptions['blockStyling'][presetIdentifier] !== undefined) {
@@ -37566,18 +37482,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
         });
     }
 
+    //Inline Style
     if (inlineStyleConfiguration) {
-        //Inline Style
+
         Object.keys(inlineStyleConfiguration.presets).forEach(function (presetIdentifier) {
+
             var inlineStylePresetConfiguration = inlineStyleConfiguration.presets[presetIdentifier];
 
             config.set('FedeTibaldo.CkStyle:InlineStyles_' + presetIdentifier, function (ckEditorConfiguration, _ref3) {
                 var editorOptions = _ref3.editorOptions;
-
-                // in the line above, {editorOptions} is extracting the key "editorOptions" from the passed-in object.
-                // this is the same as:
-                // const editorOptions = tmp.editorOptions;
-                // const {editorOptions} = tmp;
 
                 ckEditorConfiguration.plugins = ckEditorConfiguration.plugins || [];
                 ckEditorConfiguration.plugins.push((0, _InlineStylesEditing2.default)(presetIdentifier, inlineStylePresetConfiguration));
@@ -37586,7 +37499,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
             richtextToolbar.set('inlineStyles_' + presetIdentifier, {
                 component: _InlineStyleSelector2.default,
-                // only if the preset is activated in NodeType.yaml for this node property
+                // Display only if the preset is activated in NodeType.yaml for this node property
                 isVisible: function isVisible(editorOptions, formattingUnderCursor) {
                     var isVisible = false;
                     if (editorOptions['inlineStyling'] !== undefined && editorOptions['inlineStyling'][presetIdentifier] !== undefined) {
