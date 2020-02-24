@@ -24,7 +24,7 @@ export default (presetIdentifier, presetConfiguration) =>
             // View configuration
             Object.keys(presetConfiguration.options).forEach(optionIdentifier => {
                 config.view[optionIdentifier] = {
-                    name: 'span',
+                    name: presetConfiguration.options.targetTag || 'span',
                     classes: presetConfiguration.options[optionIdentifier].cssClass
                 }
             });
