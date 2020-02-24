@@ -1,5 +1,5 @@
 # An example configuration:
-#TechDivision:
+#FedeTibaldo:
 #  CkStyles:
 #    InlineStyles:
 #      presets:
@@ -33,8 +33,8 @@ Neos:
     Ui:
       resources:
         javascript:
-          'TechDivision.CkStyles:Styles':
-            resource: resource://TechDivision.CkStyles/Public/JavaScript/CkStyles/Plugin.js
+          'FedeTibaldo.CkStyles:Styles':
+            resource: resource://FedeTibaldo.CkStyles/Public/JavaScript/CkStyles/Plugin.js
       frontendConfiguration:
-        'TechDivision.CkStyles:InlineStyles': '${Configuration.setting(''TechDivision.CkStyles.InlineStyles'')}'
-        'TechDivision.CkStyles:BlockStyles': '${Configuration.setting(''TechDivision.CkStyles.BlockStyles'')}'
+        'FedeTibaldo.CkStyles:InlineStyles': '${Configuration.setting(''FedeTibaldo.CkStyles.InlineStyles'')}'
+        'FedeTibaldo.CkStyles:BlockStyles': '${Configuration.setting(''FedeTibaldo.CkStyles.BlockStyles'')}'

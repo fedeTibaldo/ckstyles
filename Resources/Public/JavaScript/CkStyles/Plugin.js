@@ -37522,7 +37522,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // THE FOLLOWING LINE WILL NOT WORK, BECAUSE IT IS NOT A TOP LEVEL EXPORT OF THE MODULE, but inside "/src/"
 //import IconButton from '@neos-project/react-ui-components/src/IconButton/';
 // Luckily, @neos-project/react-ui-components exports all components as named components
-(0, _neosUiExtensibility2.default)('TechDivision.CkStyles:Styles', {}, function (globalRegistry, _ref) {
+(0, _neosUiExtensibility2.default)('FedeTibaldo.CkStyles:Styles', {}, function (globalRegistry, _ref) {
     var frontendConfiguration = _ref.frontendConfiguration;
 
 
@@ -37530,8 +37530,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
     var ckEditorRegistry = globalRegistry.get('ckEditor5');
     var richtextToolbar = ckEditorRegistry.get('richtextToolbar');
     var config = ckEditorRegistry.get('config');
-    var inlineStyleConfiguration = frontendConfiguration['TechDivision.CkStyles:InlineStyles'];
-    var blockStyleConfiguration = frontendConfiguration['TechDivision.CkStyles:BlockStyles'];
+    var inlineStyleConfiguration = frontendConfiguration['FedeTibaldo.CkStyles:InlineStyles'];
+    var blockStyleConfiguration = frontendConfiguration['FedeTibaldo.CkStyles:BlockStyles'];
 
     if (blockStyleConfiguration) {
         // BlockStyle
@@ -37539,7 +37539,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
             var blockStylePresetConfiguration = blockStyleConfiguration.presets[presetIdentifier];
 
-            config.set('TechDivision.CkStyles:BlockStyles_' + presetIdentifier, function (ckEditorConfiguration, _ref2) {
+            config.set('FedeTibaldo.CkStyles:BlockStyles_' + presetIdentifier, function (ckEditorConfiguration, _ref2) {
                 var editorOptions = _ref2.editorOptions;
 
 
@@ -37571,7 +37571,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
         Object.keys(inlineStyleConfiguration.presets).forEach(function (presetIdentifier) {
             var inlineStylePresetConfiguration = inlineStyleConfiguration.presets[presetIdentifier];
 
-            config.set('TechDivision.CkStyle:InlineStyles_' + presetIdentifier, function (ckEditorConfiguration, _ref3) {
+            config.set('FedeTibaldo.CkStyle:InlineStyles_' + presetIdentifier, function (ckEditorConfiguration, _ref3) {
                 var editorOptions = _ref3.editorOptions;
 
                 // in the line above, {editorOptions} is extracting the key "editorOptions" from the passed-in object.

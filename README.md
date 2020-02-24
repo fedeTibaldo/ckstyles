@@ -1,4 +1,4 @@
-# TechDivision.CkStyles
+# FedeTibaldo.CkStyles
 
 This package allows to add different styles(with your own classes) for the CkEditor in Neos. The styles and classes
 depend on your implementation.
@@ -29,12 +29,12 @@ or want to add an icon, adjust the font color ...
 
 Default composer installation
 ```
-composer require techdivision/ckstyles
+composer require fedetibaldo/ckstyles
 ```
 
 Define some global presets for usage in different NodeTypes:
 ```
-TechDivision:
+FedeTibaldo:
   CkStyles:
     InlineStyles:
       presets:

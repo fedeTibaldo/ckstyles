@@ -7,14 +7,14 @@ import InlineStyleSelector from './components/InlineStyleSelector';
 import BlockStyleEditing from "./BlockStyleEditing";
 import BlockStyleSelector from "./components/BlockStyleSelector";
 
-manifest('TechDivision.CkStyles:Styles', {}, (globalRegistry, {frontendConfiguration}) => {
+manifest('FedeTibaldo.CkStyles:Styles', {}, (globalRegistry, {frontendConfiguration}) => {
 
     const ckEditorRegistry = globalRegistry.get('ckEditor5');
     const richtextToolbar = ckEditorRegistry.get('richtextToolbar');
     const config = ckEditorRegistry.get('config');
 
-    const inlineStyleConfiguration = frontendConfiguration['TechDivision.CkStyles:InlineStyles'];
-    const blockStyleConfiguration = frontendConfiguration['TechDivision.CkStyles:BlockStyles'];
+    const inlineStyleConfiguration = frontendConfiguration['FedeTibaldo.CkStyles:InlineStyles'];
+    const blockStyleConfiguration = frontendConfiguration['FedeTibaldo.CkStyles:BlockStyles'];
 
     // Block style
     if(blockStyleConfiguration) {
@@ -23,7 +23,7 @@ manifest('TechDivision.CkStyles:Styles', {}, (globalRegistry, {frontendConfigura
 
             const blockStylePresetConfiguration = blockStyleConfiguration.presets[presetIdentifier];
 
-            config.set(`TechDivision.CkStyles:BlockStyles_${presetIdentifier}`, (ckEditorConfiguration, {editorOptions}) => {
+            config.set(`FedeTibaldo.CkStyles:BlockStyles_${presetIdentifier}`, (ckEditorConfiguration, {editorOptions}) => {
                 const editing = BlockStyleEditing(presetIdentifier, blockStylePresetConfiguration);
                 ckEditorConfiguration.plugins = ckEditorConfiguration.plugins || [];
                 ckEditorConfiguration.plugins.push(editing);
@@ -54,7 +54,7 @@ manifest('TechDivision.CkStyles:Styles', {}, (globalRegistry, {frontendConfigura
 
             const inlineStylePresetConfiguration = inlineStyleConfiguration.presets[presetIdentifier];
 
-            config.set(`TechDivision.CkStyle:InlineStyles_${presetIdentifier}`, (ckEditorConfiguration, {editorOptions}) => {
+            config.set(`FedeTibaldo.CkStyle:InlineStyles_${presetIdentifier}`, (ckEditorConfiguration, {editorOptions}) => {
                 ckEditorConfiguration.plugins = ckEditorConfiguration.plugins || [];
                 ckEditorConfiguration.plugins.push(InlineStylesEditing(presetIdentifier, inlineStylePresetConfiguration));
                 return ckEditorConfiguration;
